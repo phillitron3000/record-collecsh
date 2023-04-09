@@ -1,14 +1,23 @@
+import React, { useState } from 'react';
 import './styles.css';
 
 function App() {
+  const [submitting, setSubmitting] = useState(false);
   const handleSubmit = event => {
     event.preventDefault();
-    alert('You have submitted the form.')
-  }
+    /* simulate waiting for an API response with setTimeout */
+    setSubmitting(true);
+    setTimeout(() => {
+      setSubmitting(false);
+    }, 3000)
+  };
   
   return (
     <div className="wrapper">
       <h1>Record not.</h1>
+      {submitting && 
+        <div>Submitting form.... </div>
+      }
       <form onSubmit={handleSubmit}>
         <fieldset>
           <label>
