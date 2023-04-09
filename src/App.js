@@ -51,7 +51,9 @@ function App() {
         </div>
       }
       <form onSubmit={handleSubmit}>
+        
         <fieldset disabled={submitting}>
+          
           <label>
             <p>Artist</p>
             <input name="artist" onChange={handleChange} value={formData.artist || ''}/>
@@ -104,6 +106,7 @@ function App() {
                <option value="mint">Mint</option>
             </select>
           </label>
+          
           <label>
             <p>Sleeve Condition</p>
             <select 
@@ -122,7 +125,9 @@ function App() {
             </select>
           </label>
         </fieldset>
+        
         <button type="submit" disabled={submitting}>Submit</button>
+      
       </form>
     </div>
   )
