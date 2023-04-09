@@ -1,10 +1,15 @@
 import './styles.css';
 
 function App() {
+  const handleSubmit = event => {
+    event.preventDefault();
+    alert('You have submitted the form.')
+  }
+  
   return (
     <div className="wrapper">
       <h1>Record not.</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <fieldset>
           <label>
             <p>Artist</p>
