@@ -51,39 +51,50 @@ function App() {
         </div>
       }
       <form onSubmit={handleSubmit}>
-        <fieldset>
+        <fieldset disabled={submitting}>
           <label>
             <p>Artist</p>
             <input name="artist" onChange={handleChange} value={formData.artist || ''}/>
           </label>
-        </fieldset>
-        <fieldset>
+        
           <label>
             <p>Album Title</p>
-            <input name="album" onChange={handleChange} value={formData.album || ''} />
+            <input name="album" 
+              disabled={formData.artist === '...artist'} 
+              onChange={handleChange} 
+              value={formData.album || ''}
+            />
           </label>
-        </fieldset>
-        <fieldset>
+        
           <label>
             <p>Label</p>
-            <input name="label" onChange={handleChange} value={formData.label || ''}/>
+            <input 
+              name="label" 
+              disabled={formData.album === '...album title'}
+              onChange={handleChange} 
+              value={formData.label || ''}
+            />
           </label>
-        </fieldset>
-        <fieldset>
+        
           <label>
             <p>Year</p>
             <input 
               type= "number"
               name="year" 
+              disabled={formData.label === '...label'}
               onChange={handleChange} 
               value={val}
             />
           </label>
-        </fieldset>
-        <fieldset>
+        
           <label>
             <p>Media Condition</p>
-            <select name="media_condition" onChange={handleChange} value={formData.media_condition || ''}>
+            <select 
+              name="media_condition" 
+              disabled={!formData.year}
+              onChange={handleChange} 
+              value={formData.media_condition || ''}
+            >
                <option value="">--Please choose an option--</option>
                <option value="poor">Poor</option>
                <option value="good">Good</option>
@@ -93,11 +104,14 @@ function App() {
                <option value="mint">Mint</option>
             </select>
           </label>
-        </fieldset>
-        <fieldset>
           <label>
             <p>Sleeve Condition</p>
-            <select name="sleeve_condition" onChange={handleChange} value={formData.sleeve_condition || ''}>
+            <select 
+              name="sleeve_condition" 
+              disabled={formData.media_condition === ''}
+              onChange={handleChange} 
+              value={formData.sleeve_condition || ''}
+            >
                <option value="">--Please choose an option--</option>
                <option value="poor">Poor</option>
                <option value="good">Good</option>
@@ -108,7 +122,7 @@ function App() {
             </select>
           </label>
         </fieldset>
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={submitting}>Submit</button>
       </form>
     </div>
   )
