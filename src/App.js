@@ -9,8 +9,14 @@ const formReducer = (state, event) => {
 }
 
 function App() {
-  const [formData, setFormData] = useReducer(formReducer, {});
+  const [formData, setFormData] = useReducer(formReducer, {
+    artist: '...artist',
+    album: '...album title',
+    label: '...label',
+
+  });
   const [submitting, setSubmitting] = useState(false);
+  const [val, setVal] = useState("");
   const handleSubmit = event => {
     event.preventDefault();
     /* simulate waiting for an API response with setTimeout */
@@ -21,6 +27,11 @@ function App() {
   };
 
   const handleChange = event => {
+    const regex = /^\d{0,4}$/;
+    if (event.target.value === "" || regex.test(event.target.value)) {
+      setVal(event.target.value);
+    }
+    
     setFormData({
       name: event.target.name,
       value: event.target.value,
@@ -43,25 +54,58 @@ function App() {
         <fieldset>
           <label>
             <p>Artist</p>
-            <input name="artist" onChange={handleChange} />
+            <input name="artist" onChange={handleChange} value={formData.artist || ''}/>
           </label>
         </fieldset>
         <fieldset>
           <label>
             <p>Album Title</p>
-            <input name="title" onChange={handleChange} />
+            <input name="album" onChange={handleChange} value={formData.album || ''} />
           </label>
         </fieldset>
         <fieldset>
           <label>
             <p>Label</p>
-            <input name="label" onChange={handleChange} />
+            <input name="label" onChange={handleChange} value={formData.label || ''}/>
           </label>
         </fieldset>
         <fieldset>
           <label>
             <p>Year</p>
-            <input name="year" onChange={handleChange} />
+            <input 
+              type= "number"
+              name="year" 
+              onChange={handleChange} 
+              value={val}
+            />
+          </label>
+        </fieldset>
+        <fieldset>
+          <label>
+            <p>Media Condition</p>
+            <select name="media_condition" onChange={handleChange} value={formData.media_condition || ''}>
+               <option value="">--Please choose an option--</option>
+               <option value="poor">Poor</option>
+               <option value="good">Good</option>
+               <option value="very-good">Very Good</option>
+               <option value="very-good-plus">Very Good+</option>
+               <option value="near-mint">Near Mint</option>
+               <option value="mint">Mint</option>
+            </select>
+          </label>
+        </fieldset>
+        <fieldset>
+          <label>
+            <p>Sleeve Condition</p>
+            <select name="sleeve_condition" onChange={handleChange} value={formData.sleeve_condition || ''}>
+               <option value="">--Please choose an option--</option>
+               <option value="poor">Poor</option>
+               <option value="good">Good</option>
+               <option value="very-good">Very Good</option>
+               <option value="very-good-plus">Very Good+</option>
+               <option value="near-mint">Near Mint</option>
+               <option value="mint">Mint</option>
+            </select>
           </label>
         </fieldset>
         <button type="submit">Submit</button>
